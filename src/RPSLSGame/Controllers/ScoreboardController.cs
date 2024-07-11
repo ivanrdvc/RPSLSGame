@@ -48,21 +48,4 @@ public class ScoreboardController : ControllerBase
 
         return NoContent();
     }
-
-    /// <summary>
-    /// Gets the overall statistics for a specific player.
-    /// </summary>
-    /// <param name="playerId">The ID of the player.</param>
-    /// <returns>The statistics of the player.</returns>
-    /// <response code="200">Returns the player's statistics</response>
-    /// <response code="404">If the player is not found</response>
-    [HttpGet("player-stats/{playerId}")]
-    [ProducesResponseType(typeof(PlayerStatisticsModel), 200)]
-    [ProducesResponseType(404)]
-    public async Task<IActionResult> GetPlayerStatistics(int playerId)
-    {
-        var playerStats = await _gameService.GetPlayerStatisticsAsync(playerId);
-
-        return Ok(playerStats);
-    }
 }
