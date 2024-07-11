@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+    rpslsgame_app:
+        image: rpslsgame
+        container_name: rpslsgame_app
+        build:
+            context: .
+            dockerfile: src/RPSLSGame/Dockerfile
+        ports:
+            - "8080:8080"
+            - "8081:8081"
+        depends_on:
+            - postgres_db
+        environment:
+            - ConnectionStrings__game_db=Host=postgres_db; Database=game_db; Username=postgres; Password=root
+
+    postgres_db:
+        image: postgres:latest
+        container_name: postgres_db
+        environment:
+            POSTGRES_DB: rpslsgame_app
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: root
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:

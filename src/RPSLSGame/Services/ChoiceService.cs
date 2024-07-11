@@ -1,32 +1,34 @@
+using Microsoft.EntityFrameworkCore;
+using RPSLSGame.Data;
 using RPSLSGame.Models;
 
 namespace RPSLSGame.Services;
 
 public class ChoiceService : IChoiceService
 {
-    private static readonly List<ChoiceModel> Choices = new()
-    {
-        new ChoiceModel { Id = 1, Name = "Rock" },
-        new ChoiceModel { Id = 2, Name = "Paper" },
-        new ChoiceModel { Id = 3, Name = "Scissors" },
-        new ChoiceModel { Id = 4, Name = "Lizard" },
-        new ChoiceModel { Id = 5, Name = "Spock" }
-    };
-
+    private readonly GameDbContext _context;
     private readonly Random _random;
 
-    public ChoiceService()
+    public ChoiceService(GameDbContext context)
     {
+        _context = context;
         _random = new Random();
     }
 
-    public List<ChoiceModel> GetChoices()
+    public async Task<List<ChoiceModel>> GetChoicesAsync()
     {
-        return Choices;
+        var choices = await _context.Choices.Select(
+                c => new ChoiceModel { Id = c.Id, Name = c.Name })
+            .ToListAsync();
+
+        return choices;
     }
 
-    public ChoiceModel GetRandomChoice()
+    public async Task<ChoiceModel> GetRandomChoiceAsync()
     {
-        return Choices[_random.Next(Choices.Count)];
+        var choices = await _context.Choices.ToListAsync();
+        var randomChoice = choices[_random.Next(choices.Count)];
+
+        return new ChoiceModel { Id = randomChoice.Id, Name = randomChoice.Name };
     }
 }

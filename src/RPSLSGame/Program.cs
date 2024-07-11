@@ -1,4 +1,4 @@
-using RPSLSGame.Extensions;
+using RPSLSGame;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddRPSLSGameServices();
+builder.Services.AddRPSLSGameServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -14,6 +14,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await app.InitializeDatabaseAsync();
 }
 
 app.UseHttpsRedirection();
