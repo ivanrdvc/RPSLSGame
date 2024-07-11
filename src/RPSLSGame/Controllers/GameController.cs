@@ -17,10 +17,21 @@ public class GameController : ControllerBase
         _choiceService = choiceService;
     }
 
-    [HttpPost]
+    /// <summary>
+    /// Plays a game round against a computer opponent.
+    /// </summary>
+    /// <param name="request">The player's choice ID.</param>
+    /// <returns>The game result.</returns>
+    /// <response code="200">Returns the game result</response>
+    /// <response code="400">If the player's choice ID is invalid</response>
+    [HttpPost("play")]
+    [ProducesResponseType(typeof(PlayResponse), 200)]
+    [ProducesResponseType(typeof(ProblemDetails), 400)]
     public async Task<IActionResult> Play([FromBody] PlayRequest request)
     {
-        throw new NotImplementedException();
+        var result = await _gameService.PlayGameAgainstComputerAsync(request.Player);
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -29,6 +40,7 @@ public class GameController : ControllerBase
     /// <returns>A list of choices.</returns>
     /// <response code="200">Returns the list of choices</response>
     [HttpGet("choices")]
+    [ProducesResponseType(typeof(List<ChoiceModel>), 200)]
     public async Task<IActionResult> GetChoices()
     {
         var choices = await _choiceService.GetChoicesAsync();

@@ -17,8 +17,9 @@ public class ChoiceService : IChoiceService
 
     public async Task<List<ChoiceModel>> GetChoicesAsync()
     {
-        var choices = await _context.Choices.Select(
-                c => new ChoiceModel { Id = c.Id, Name = c.Name })
+        var choices = await _context.Choices
+            .AsNoTracking()
+            .Select(c => ChoiceModel.FromDomain(c))
             .ToListAsync();
 
         return choices;
@@ -26,9 +27,12 @@ public class ChoiceService : IChoiceService
 
     public async Task<ChoiceModel> GetRandomChoiceAsync()
     {
-        var choices = await _context.Choices.ToListAsync();
+        var choices = await _context.Choices
+            .AsNoTracking()
+            .ToListAsync();
+
         var randomChoice = choices[_random.Next(choices.Count)];
 
-        return new ChoiceModel { Id = randomChoice.Id, Name = randomChoice.Name };
+        return ChoiceModel.FromDomain(randomChoice);
     }
 }

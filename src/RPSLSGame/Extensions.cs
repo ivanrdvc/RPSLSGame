@@ -11,6 +11,7 @@ public static class Extensions
     {
         services.AddScoped<IGameService, GameService>();
         services.AddScoped<IChoiceService, ChoiceService>();
+        services.AddScoped<IRandomNumberService, RandomNumberService>();
 
         var connectionString = configuration.GetConnectionString("game_db") ??
                                throw new InvalidOperationException(

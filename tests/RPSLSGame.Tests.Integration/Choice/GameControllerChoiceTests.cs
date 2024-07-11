@@ -3,13 +3,13 @@ using FluentAssertions;
 using RPSLSGame.Models;
 using RPSLSGame.Tests.Integration.Common;
 
-namespace RPSLSGame.Tests.Integration.Choices;
+namespace RPSLSGame.Tests.Integration.Choice;
 
-public class GameControllerTests : IntegrationTest
+public class GameControllerChoiceTests : IntegrationTest
 {
     private readonly HttpClient _client;
 
-    public GameControllerTests(RPSLSGameTestFactory factory) : base(factory)
+    public GameControllerChoiceTests(RPSLSGameTestFactory factory) : base(factory)
     {
         _client = factory.CreateClient();
     }
