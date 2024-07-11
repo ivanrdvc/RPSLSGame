@@ -53,4 +53,6 @@ There are two ways to run the project: using Docker Compose or on a local machin
 - I considered using Vertical Slices architecture with handlers, but that also seemed excessive at this point. If we were to add more features, I would then split the code per feature (for example, if we add multiplayer support).
 
 ### What could be improved
-- TODO
+- Fetching the computer's choice from the random number service could be more resilient and fail gracefully.
+- The game result (e.g., "win") could be reused to avoid hardcoding.
+- Add and improve unit and integration tests for additional features.

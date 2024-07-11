@@ -33,8 +33,8 @@ public class GameControllerPlayTests : IntegrationTest
         playResponse.Should().NotBeNull();
         playResponse!.Player.Should().Be(playRequest.Player);
         playResponse.Computer.Should().BeInRange(1, 5);
-        playResponse.Result.Should().NotBeNullOrWhiteSpace();
-        playResponse.Result.Should().MatchRegex("^(win|lose|tie)$");
+        playResponse.Results.Should().NotBeNullOrWhiteSpace();
+        playResponse.Results.Should().MatchRegex("^(win|lose|tie)$");
     }
 
     [Fact]

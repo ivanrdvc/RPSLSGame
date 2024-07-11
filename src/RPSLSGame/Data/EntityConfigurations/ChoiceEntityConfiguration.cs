@@ -5,7 +5,7 @@ namespace RPSLSGame.Data.EntityConfigurations;
 
 public class ChoiceEntityConfiguration : AuditEntityConfiguration<Choice>
 {
-    public override  void Configure(EntityTypeBuilder<Choice> builder)
+    public override void Configure(EntityTypeBuilder<Choice> builder)
     {
         builder.Property(p => p.Name)
             .IsRequired()

@@ -9,12 +9,14 @@ public class GameDbContext : DbContext
     public GameDbContext(DbContextOptions<GameDbContext> options) : base(options) { }
 
     public DbSet<Choice> Choices { get; init; }
+    public DbSet<PlayerStatistics> PlayerStatistics { get; init; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         builder.ApplyConfiguration(new ChoiceEntityConfiguration());
+        builder.ApplyConfiguration(new PlayerStatisticsEntityConfiguration());
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())

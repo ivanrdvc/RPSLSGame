@@ -29,7 +29,8 @@ public class GameController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), 400)]
     public async Task<IActionResult> Play([FromBody] PlayRequest request)
     {
-        var result = await _gameService.PlayGameAgainstComputerAsync(request.Player);
+        var result =
+            await _gameService.PlayGameAgainstComputerAsync(request.Player, request.PlayerId);
 
         return Ok(result);
     }
