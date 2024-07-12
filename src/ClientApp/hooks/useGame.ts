@@ -1,7 +1,7 @@
+import { useState, useEffect, useRef } from 'react';
+import useSWR from 'swr';
 import { API_ENDPOINTS } from '@/config/api';
 import { fetcher, postRequest } from '@/utils/api';
-import { useState } from 'react';
-import useSWR from 'swr';
 
 interface Choice {
   id: number;
@@ -19,6 +19,7 @@ const useGame = () => {
   const [result, setResult] = useState<{ results: string; player: string; computer: string } | null>(null);
   const [loadingPlay, setLoadingPlay] = useState(false);
   const [playError, setPlayError] = useState<string | null>(null);
+  const playerIdRef = useRef<number>(Math.floor(Math.random() * 10) + 1);
 
   const handleChoiceClick = async (player: number) => {
     setLoadingPlay(true);
@@ -26,7 +27,7 @@ const useGame = () => {
     setResult(null);
 
     try {
-      const data: PlayResponse = await postRequest(API_ENDPOINTS.PLAY, { player, playerId: 1 });
+      const data: PlayResponse = await postRequest(API_ENDPOINTS.PLAY, { player, playerId: playerIdRef.current });
 
       const playerChoice = choices?.find(choice => choice.id === data.player)?.name || 'Unknown';
       const computerChoice = choices?.find(choice => choice.id === data.computer)?.name || 'Unknown';
@@ -46,6 +47,7 @@ const useGame = () => {
     loadingPlay,
     playError,
     handleChoiceClick,
+    playerId: playerIdRef.current,
   };
 };
 

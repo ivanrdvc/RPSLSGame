@@ -36,7 +36,7 @@ public class ScoreboardController : ControllerBase
     }
 
     /// <summary>
-    /// Resets the scoreboard by clearing all player streaks.
+    /// Resets the scoreboard by deleting all player statistics.
     /// </summary>
     /// <returns>A response indicating the result of the operation.</returns>
     /// <response code="204">Scoreboard reset successfully</response>

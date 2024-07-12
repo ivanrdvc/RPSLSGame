@@ -53,7 +53,7 @@ public class GameService : IGameService
     public async Task ResetScoreboardAsync()
     {
         _context.PlayerStatistics.RemoveRange(_context.PlayerStatistics);
-        
+
         await _context.SaveChangesAsync();
     }
 

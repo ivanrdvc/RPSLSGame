@@ -1,18 +1,8 @@
-"use client";
-
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
-  Text,
   IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
@@ -20,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-interface Props {
+interface NavlinkProps {
   children: React.ReactNode;
   path: string;
 }
 
-const NavLink = (props: Props) => {
+const NavLink = (props: NavlinkProps) => {
   const { children, path } = props;
 
   return (

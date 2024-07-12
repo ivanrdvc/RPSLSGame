@@ -1,8 +1,8 @@
-import { Box, Button, Spinner, Text } from "@chakra-ui/react";
-import useGame from "@/hooks/useGame";
+import { Box, Button, Spinner, Text } from '@chakra-ui/react';
+import useGame from '@/hooks/useGame';
 
 const Game = () => {
-  const { choices, choicesError, result, loadingPlay, playError, handleChoiceClick } = useGame();
+  const { choices, choicesError, result, loadingPlay, playError, handleChoiceClick, playerId } = useGame();
 
   if (choicesError) {
     return <Text color="red.500">Error loading choices.</Text>;
@@ -14,6 +14,7 @@ const Game = () => {
 
   return (
     <Box>
+      <Text mb={4}>Your Player ID: {playerId}</Text>
       {choices.map((choice) => (
         <Button
           key={choice.id}
@@ -27,17 +28,13 @@ const Game = () => {
         </Button>
       ))}
 
-      {loadingPlay && (
-        <Box p="4">
-          <Spinner />
-        </Box>
-      )}
+      {loadingPlay && <Spinner />}
 
       {playError && <Text color="red.500">Error: {playError}</Text>}
 
       {result && (
         <Box mt={4}>
-          <Text>{result.results === "win" ? "You win!" : result.results === "lose" ? "You lose!" : "It's a tie!"}</Text>
+          <Text>{result.results === 'win' ? 'You win!' : result.results === 'lose' ? 'You lose!' : 'It\'s a tie!'}</Text>
           <Text>Player choice: {result.player}</Text>
           <Text>Computer choice: {result.computer}</Text>
         </Box>
