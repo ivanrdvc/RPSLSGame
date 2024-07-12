@@ -52,24 +52,9 @@ public class GameService : IGameService
 
     public async Task ResetScoreboardAsync()
     {
-        var playerStatistics = await _context.PlayerStatistics.ToListAsync();
-        foreach (var ps in playerStatistics)
-        {
-            ps.WinStreak = 0;
-        }
+        _context.PlayerStatistics.RemoveRange(_context.PlayerStatistics);
 
         await _context.SaveChangesAsync();
-    }
-
-    public async Task<PlayerStatisticsModel> GetPlayerStatisticsAsync(int playerId)
-    {
-        var playerStatistics = await _context.PlayerStatistics.FindAsync(playerId);
-        if (playerStatistics == null)
-        {
-            throw new ArgumentException($"Player with ID {playerId} not found.");
-        }
-
-        return PlayerStatisticsModel.FromDomain(playerStatistics);
     }
 
     private async Task<Choice> GetPlayerChoiceAsync(int playerChoiceId)

@@ -22,7 +22,7 @@ public class PlayerStatisticsModel
             TotalLosses = playerStatistics.TotalLosses,
             TotalTies = playerStatistics.TotalTies,
             LastGameResult = playerStatistics.LastGameResult,
-            LastPlayedAt = playerStatistics.LastPlayedAt
+            LastPlayedAt = playerStatistics.LastPlayedAt.ToLocalTime()
         };
     }
 }

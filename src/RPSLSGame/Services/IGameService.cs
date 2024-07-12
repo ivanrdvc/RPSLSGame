@@ -27,11 +27,4 @@ public interface IGameService
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
     Task ResetScoreboardAsync();
-
-    /// <summary>
-    /// Gets the overall statistics for a specific player.
-    /// </summary>
-    /// <param name="playerId">The ID of the player.</param>
-    /// <returns>A <see cref="PlayerStatisticsModel"/> representing the player's statistics.</returns>
-    Task<PlayerStatisticsModel> GetPlayerStatisticsAsync(int playerId);
 }

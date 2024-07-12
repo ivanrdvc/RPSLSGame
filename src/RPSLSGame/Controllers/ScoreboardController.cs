@@ -36,7 +36,7 @@ public class ScoreboardController : ControllerBase
     }
 
     /// <summary>
-    /// Resets the scoreboard by clearing all player streaks.
+    /// Resets the scoreboard by deleting all player statistics.
     /// </summary>
     /// <returns>A response indicating the result of the operation.</returns>
     /// <response code="204">Scoreboard reset successfully</response>
@@ -47,22 +47,5 @@ public class ScoreboardController : ControllerBase
         await _gameService.ResetScoreboardAsync();
 
         return NoContent();
-    }
-
-    /// <summary>
-    /// Gets the overall statistics for a specific player.
-    /// </summary>
-    /// <param name="playerId">The ID of the player.</param>
-    /// <returns>The statistics of the player.</returns>
-    /// <response code="200">Returns the player's statistics</response>
-    /// <response code="404">If the player is not found</response>
-    [HttpGet("player-stats/{playerId}")]
-    [ProducesResponseType(typeof(PlayerStatisticsModel), 200)]
-    [ProducesResponseType(404)]
-    public async Task<IActionResult> GetPlayerStatistics(int playerId)
-    {
-        var playerStats = await _gameService.GetPlayerStatisticsAsync(playerId);
-
-        return Ok(playerStats);
     }
 }
